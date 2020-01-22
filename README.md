@@ -22,7 +22,7 @@ curl -s https://api.github.com/repos/alatas/squid-alpine-ssl/releases/latest | g
 docker-compose up
 ```
 
-4. Change your proxy configuration to http://localhost:3128/ (sslbump disabled) or http://localhost:4128/ (sslbump enabled)
+4. Change your proxy configuration to http://localhost:3128/ (sslbump disabled) or http://localhost:3129/ (sslbump enabled)
 
 ## What is Squid?
 
@@ -40,7 +40,7 @@ Threat actors have also recognized the benefits of transport security and are in
 
 With the SSL Bump feature, the squid intercepts the encrypted SSL traffic and encrypts it again to the customer's direction. In other words, when a client browses a secure site, Squid takes the actual web server certificate and establishes an SSL connection to the web server. Then, It sends a new digital certificate to the client that looks like a web server's certificate to it and establishes a secure connection between the browser and the proxy.
 
-The configuration of this image provides two different endpoints to the proxy. One of them is not sslbumped (3128), the other one is sslbump enabled (4128). It's not necessary to use sslbump feature to use squid as a regular web proxy.
+The configuration of this image provides two different endpoints to the proxy. One of them is not sslbumped (3128), the other one is sslbump enabled (3129). It's not necessary to use sslbump feature to use squid as a regular web proxy.
 
 ## Legal Warning
 
@@ -56,7 +56,7 @@ SSLBump is an SSL/HTTPS interception. HTTPS interception has ethical and legal i
 
 There are a few settings in the `docker-compose.yml` file as follows:
 
-* Ports: There are two TCP endpoint configurations. 3128 is the regular proxy port of squid and it is not sslbump feature enabled. 4128 is the sslbump enabled port. If you want to change local ports to connect, change the first part of the settings. (ex. "8080:3128")
+* Ports: There are two TCP endpoint configurations. 3128 is the regular proxy port of squid and it is not sslbump feature enabled. 3129 is the sslbump enabled port. If you want to change local ports to connect, change the first part of the settings. (ex. "8080:3128")
 * Environment values: Squid needs [a root certificate](#sslbump-root-certificate) for the sslbump feature. The following settings are used when the first time root certificate is created. If you need to recreate the root certificate, you need to delete all files in the `cert` folder.
   * `CN`: Common name of the certificate
   * `O` : Organization of the certificate owner
